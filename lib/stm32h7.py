@@ -110,8 +110,8 @@ class Flash():
 
     def erase_all(self):
         self._dbg.debug('erase_all')
-        clear_sr(0)
-        clear_sr(1)
+        self.clear_sr(0)
+        self.clear_sr(1)
         cr = Flash.FLASH_CR_PSIZE32
         self._stlink.set_debugreg32(Flash.FLASH_CR_REGS[0], cr)
         self._stlink.set_debugreg32(Flash.FLASH_CR_REGS[1], cr)
@@ -120,7 +120,7 @@ class Flash():
 
     def erase_bank(self, bank):
         self._dbg.debug('erase_bank %d' % bank)
-        clear_sr(bank)
+        self.clear_sr(bank)
         cr = Flash.FLASH_CR_PSIZE32 | Flash.FLASH_OPTCR_BER
         self._stlink.set_debugreg32(Flash.FLASH_CR_REGS[bank], cr)
         cr |= Flash.FLASH_OPTCR_START
